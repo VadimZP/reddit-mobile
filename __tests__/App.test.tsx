@@ -1,17 +1,49 @@
-/**
- * @format
- */
+import "react-native";
+import React from "react";
 
-import 'react-native';
-import React from 'react';
-import App from '../App';
+import { it } from "@jest/globals";
+import { render } from "@testing-library/react-native";
 
-// Note: import explicitly to use the types shipped with jest.
-import {it} from '@jest/globals';
+describe("App component", () => {
+  it("renders auth page when authentication failed", async () => {
+    require("react");
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+    jest.mock("react", () => jest.requireActual("react"));
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+    jest.mock("@react-native-cookies/cookies", () => {
+      return {
+        get: () => Promise.resolve(null)
+      };
+    });
+
+    let App;
+    jest.isolateModules(() => {
+      App = require("../App").default;
+    });
+
+    const view = render(<App />);
+
+    expect(await view.findByText(/sign in/i)).toBeOnTheScreen();
+  });
+
+  it("renders home page when authentication succeed", async () => {
+    require("react");
+
+    jest.mock("react", () => jest.requireActual("react"));
+
+    jest.mock("@react-native-cookies/cookies", () => {
+      return {
+        get: () => Promise.resolve({ user: { userId: { value: "5" } } })
+      };
+    });
+
+    let App;
+    jest.isolateModules(() => {
+      App = require("../App").default;
+    });
+
+    const view = render(<App />);
+
+    expect(await view.findByText(/create post/i)).toBeOnTheScreen();
+  });
 });
