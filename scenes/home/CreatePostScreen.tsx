@@ -6,7 +6,7 @@ import { Button, Input, Layout, Text } from "@ui-kitten/components";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { AppRoute } from "../../navigation/app-routes";
+import { AppRoutes } from "../../navigation/AppRoutes";
 import { CreatePostScreenProps } from "../../navigation/HomeNavigator";
 
 const styles = StyleSheet.create({
@@ -39,7 +39,7 @@ export const CreatePostScreen = ({ navigation }: CreatePostScreenProps) => {
 
   const onSubmit = (data: CreatePostSchemaType) => {
     if (isValid) {
-      navigation.navigate(AppRoute.CHOOSE_COMMUNITY, data);
+      navigation.navigate(AppRoutes.CHOOSE_COMMUNITY, data);
     }
   };
 

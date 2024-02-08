@@ -5,7 +5,7 @@ import { Button, Input, Layout, List, ListItem } from "@ui-kitten/components";
 
 import { useRequestSearchCommunity } from "../../api/queries/community";
 import { useRequestCreatePost } from "../../api/queries/post";
-import { AppRoute } from "../../navigation/app-routes";
+import { AppRoutes } from "../../navigation/AppRoutes";
 import { ChooseCommunityScreenProps } from "../../navigation/HomeNavigator";
 import { UserContext } from "../../utils/userContext";
 
@@ -65,7 +65,7 @@ export const ChooseCommunityScreen = ({
                 },
                 {
                   onSuccess: (post) => {
-                    navigation.navigate(AppRoute.POST, post);
+                    navigation.navigate(AppRoutes.POST, { postId: post.id });
                   }
                 }
               );

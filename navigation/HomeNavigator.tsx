@@ -6,8 +6,8 @@ import {
   NativeStackNavigationProp
 } from "@react-navigation/native-stack";
 
-import { AppRoute } from "./app-routes";
 import { AppNavigatorParams } from "./AppNavigator";
+import { AppRoutes } from "./AppRoutes";
 import {
   ChooseCommunityScreen,
   CreatePostScreen,
@@ -16,48 +16,48 @@ import {
 } from "../scenes/home";
 
 type HomeNavigatorParams = AppNavigatorParams & {
-  [AppRoute.POSTS]: undefined;
-  [AppRoute.CREATE_POST]: undefined;
-  [AppRoute.CHOOSE_COMMUNITY]: undefined;
-  [AppRoute.POST]: undefined;
+  [AppRoutes.POSTS]: undefined;
+  [AppRoutes.CREATE_POST]: undefined;
+  [AppRoutes.CHOOSE_COMMUNITY]: undefined;
+  [AppRoutes.POST]: undefined;
 };
 
 export interface PostsScreenProps {
-  navigation: NativeStackNavigationProp<HomeNavigatorParams, AppRoute.POSTS>;
-  route: RouteProp<HomeNavigatorParams, AppRoute.POSTS>;
+  navigation: NativeStackNavigationProp<HomeNavigatorParams, AppRoutes.POSTS>;
+  route: RouteProp<HomeNavigatorParams, AppRoutes.POSTS>;
 }
 
 export interface CreatePostScreenProps {
   navigation: NativeStackNavigationProp<
     HomeNavigatorParams,
-    AppRoute.CREATE_POST
+    AppRoutes.CREATE_POST
   >;
-  route: RouteProp<HomeNavigatorParams, AppRoute.CREATE_POST>;
+  route: RouteProp<HomeNavigatorParams, AppRoutes.CREATE_POST>;
 }
 
 export interface ChooseCommunityScreenProps {
   navigation: NativeStackNavigationProp<
     HomeNavigatorParams,
-    AppRoute.CHOOSE_COMMUNITY
+    AppRoutes.CHOOSE_COMMUNITY
   >;
-  route: RouteProp<HomeNavigatorParams, AppRoute.CHOOSE_COMMUNITY>;
+  route: RouteProp<HomeNavigatorParams, AppRoutes.CHOOSE_COMMUNITY>;
 }
 
 export interface PostScreenProps {
-  navigation: NativeStackNavigationProp<HomeNavigatorParams, AppRoute.POST>;
-  route: RouteProp<HomeNavigatorParams, AppRoute.POST>;
+  navigation: NativeStackNavigationProp<HomeNavigatorParams, AppRoutes.POST>;
+  route: RouteProp<HomeNavigatorParams, AppRoutes.POST>;
 }
 
 const Stack = createNativeStackNavigator<HomeNavigatorParams>();
 
 export const HomeNavigator = (): React.ReactElement => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name={AppRoute.POSTS} component={PostsScreen} />
-    <Stack.Screen name={AppRoute.CREATE_POST} component={CreatePostScreen} />
+    <Stack.Screen name={AppRoutes.POSTS} component={PostsScreen} />
+    <Stack.Screen name={AppRoutes.CREATE_POST} component={CreatePostScreen} />
     <Stack.Screen
-      name={AppRoute.CHOOSE_COMMUNITY}
+      name={AppRoutes.CHOOSE_COMMUNITY}
       component={ChooseCommunityScreen}
     />
-    <Stack.Screen name={AppRoute.POST} component={PostScreen} />
+    <Stack.Screen name={AppRoutes.POST} component={PostScreen} />
   </Stack.Navigator>
 );
