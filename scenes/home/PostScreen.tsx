@@ -2,7 +2,9 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 import { QueryClient, useQueryClient } from "@tanstack/react-query";
-import { Layout, Text } from "@ui-kitten/components";
+import { Divider, Layout, List, Text } from "@ui-kitten/components";
+
+import { useRequestGetComments } from "../../api/queries/comments";
 
 const styles = StyleSheet.create({
   container: {
@@ -12,12 +14,12 @@ const styles = StyleSheet.create({
 });
 
 interface Post {
-  author: { username: "test" };
-  community: { title: "Liberty" };
-  createdAt: "2024-02-01T22:10:10.902Z";
-  id: 7;
-  text: "Hellow kekek";
-  title: "First post";
+  author: { username: string };
+  community: { title: string };
+  createdAt: string;
+  id: number;
+  text: string;
+  title: string;
 }
 
 export const PostScreen = ({ navigation, route }) => {
@@ -29,12 +31,31 @@ export const PostScreen = ({ navigation, route }) => {
     .getQueryData<Post[]>(["posts"])
     ?.find((item) => item.id === postId);
 
-  console.log("🚀 ~ PostScreen ~ postId:", post);
+  const { data, isLoading, error } = useRequestGetComments({
+    postId: postId ? +postId : undefined
+  });
 
   return (
     <Layout style={styles.container}>
-      {/* <Text category="h5">{post.title}</Text>
-      <Text>{post.text}</Text> */}
+      <Text category="h5">{post?.title}</Text>
+      <Text>{post?.text}</Text>
+      <List
+        data={data}
+        renderItem={({
+          item
+        }: {
+          item: {
+            id: number;
+            text: string;
+            createdAt: string;
+            depth: number;
+          }[];
+        }) => {
+          return item.map((comment) => (
+            <Text style={{ marginLeft: +`${comment.depth}0` }}>{`${comment.text}; ${comment.id}`}</Text>
+          ));
+        }}
+      />
     </Layout>
   );
 };

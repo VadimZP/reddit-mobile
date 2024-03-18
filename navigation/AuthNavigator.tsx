@@ -22,7 +22,7 @@ export interface SignInScreenProps {
 const Stack = createNativeStackNavigator<AuthNavigatorParams>();
 
 export const AuthNavigator = (): React.ReactElement => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name={AppRoutes.SIGN_IN} component={SignInScreen} />
   </Stack.Navigator>
 );

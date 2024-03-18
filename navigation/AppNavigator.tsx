@@ -20,9 +20,17 @@ export const AppNavigator = (
 ): React.ReactElement => (
   <Stack.Navigator {...props}>
     {props.isSignedIn ? (
-      <Stack.Screen name={AppRoutes.HOME} component={HomeNavigator} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name={AppRoutes.HOME}
+        component={HomeNavigator}
+      />
     ) : (
-      <Stack.Screen name={AppRoutes.AUTH} component={AuthNavigator} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name={AppRoutes.AUTH}
+        component={AuthNavigator}
+      />
     )}
   </Stack.Navigator>
 );

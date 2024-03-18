@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, Text } from "react-native";
 
 import { Layout } from "@ui-kitten/components";
 
-import { useRequestGetCommunities } from "../utils/hooks/reactQuery";
+import { useRequestGetCommunities } from "../api/queries/community";
 import { UserContext } from "../utils/userContext";
 
 const styles = StyleSheet.create({

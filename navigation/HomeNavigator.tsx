@@ -5,6 +5,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp
 } from "@react-navigation/native-stack";
+import { Icon } from "@ui-kitten/components";
 
 import { AppNavigatorParams } from "./AppNavigator";
 import { AppRoutes } from "./AppRoutes";
@@ -50,8 +51,28 @@ export interface PostScreenProps {
 
 const Stack = createNativeStackNavigator<HomeNavigatorParams>();
 
-export const HomeNavigator = (): React.ReactElement => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
+const BackButton = ({ restOfProps, navigation }) => {
+  return (
+    <Icon
+      {...restOfProps}
+      onPress={() => {
+        navigation.goBack();
+      }}
+      style={{ width: 36, height: 36 }}
+      name="chevron-left-outline"
+    />
+  );
+};
+
+export const HomeNavigator = ({ navigation, route }): React.ReactElement => (
+  <Stack.Navigator
+    screenOptions={{
+      headerBackTitleVisible: false,
+      headerLeft: (props) => (
+        <BackButton navigation={navigation} restOfProps={props} />
+      )
+    }}
+  >
     <Stack.Screen name={AppRoutes.POSTS} component={PostsScreen} />
     <Stack.Screen name={AppRoutes.CREATE_POST} component={CreatePostScreen} />
     <Stack.Screen

@@ -21,6 +21,14 @@ module.exports = {
           caseInsensitive: true
         }
       }
+    ],
+    "react/no-unstable-nested-components": [
+      "off",
+      {
+        allowAsProps: true,
+        customValidators:
+          [] /* optional array of validators used for propTypes validation */
+      }
     ]
   }
 };

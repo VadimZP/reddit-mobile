@@ -3,7 +3,8 @@ import React from "react";
 import * as eva from "@eva-design/eva";
 import { NavigationContainer } from "@react-navigation/native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ApplicationProvider } from "@ui-kitten/components";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
+import { EvaIconsPack } from "@ui-kitten/eva-icons";
 
 import { AppNavigator } from "./navigation/AppNavigator";
 import useUser from "./utils/hooks/useUser";
@@ -15,15 +16,18 @@ function App(): React.JSX.Element {
   const { user, setUser } = useUser();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <UserContext.Provider value={{ user, setUser }}>
-        <ApplicationProvider {...eva} theme={eva.light}>
-          <NavigationContainer>
-            <AppNavigator isSignedIn={!!user} />
-          </NavigationContainer>
-        </ApplicationProvider>
-      </UserContext.Provider>
-    </QueryClientProvider>
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <QueryClientProvider client={queryClient}>
+        <UserContext.Provider value={{ user, setUser }}>
+          <ApplicationProvider {...eva} theme={eva.light}>
+            <NavigationContainer>
+              <AppNavigator isSignedIn={!!user} />
+            </NavigationContainer>
+          </ApplicationProvider>
+        </UserContext.Provider>
+      </QueryClientProvider>
+    </>
   );
 }
 
